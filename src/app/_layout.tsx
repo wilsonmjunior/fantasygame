@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
@@ -11,10 +11,15 @@ import {
   Poppins_900Black,
   useFonts,
 } from '@expo-google-fonts/poppins';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ToastManager from 'toastify-react-native'
 
 import { Colors } from '../constants/Colors';
+import { LoadTeamProvider } from '../presentation/hooks';
+
+SplashScreen.setOptions({
+  duration: 400,
+  fade: true,
+});
  
 SplashScreen.preventAutoHideAsync();
 
@@ -43,7 +48,9 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      <SafeAreaProvider>
+      <StatusBar backgroundColor="#1C1C1C" barStyle="light-content" translucent />
+
+      <LoadTeamProvider>
         <Stack 
           screenOptions={{ 
             headerShown: false,
@@ -54,14 +61,12 @@ export default function RootLayout() {
           <Stack.Screen 
             name="index" 
             options={{ 
-              headerShown: false,
               gestureEnabled: false,
             }} 
           />
           <Stack.Screen 
-            name="onboarding/index" 
+            name="onboarding" 
             options={{ 
-              headerShown: false,
               animation: 'fade',
               gestureEnabled: false,
             }} 
@@ -69,21 +74,26 @@ export default function RootLayout() {
           <Stack.Screen 
             name="(tabs)" 
             options={{ 
-              headerShown: false,
               gestureEnabled: false,
             }} 
           />
           <Stack.Screen 
             name="profile" 
             options={{ 
-              headerShown: false,
               animation: 'slide_from_left',
               gestureEnabled: true,
             }} 
           />
+          <Stack.Screen 
+            name="team" 
+            options={{ 
+              animation: 'slide_from_bottom',
+              presentation: 'modal',
+              gestureEnabled: true,
+            }} 
+          />
         </Stack>
-      </SafeAreaProvider>
-
+      </LoadTeamProvider>
       <ToastManager />
     </GestureHandlerRootView>
   );

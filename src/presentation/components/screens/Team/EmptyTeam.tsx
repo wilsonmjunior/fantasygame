@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { BorderlessButton } from 'react-native-gesture-handler';
+import { RectButton } from 'react-native-gesture-handler';
 import { useRouter } from 'expo-router';
 
 import TeamIcon from '@/assets/icons/team.svg';
@@ -11,7 +11,7 @@ export function EmptyTeam() {
   const router = useRouter();
 
   const handleCreateTeam = () => {
-    router.push('/(tabs)/team/edit');
+    router.push('/team/edit');
   };
 
   return (
@@ -25,9 +25,9 @@ export function EmptyTeam() {
         Crie seu time para começar a jogar e competir com outros jogadores.
       </Text>
 
-      <BorderlessButton style={styles.button} onPress={handleCreateTeam}>
+      <RectButton style={styles.button} onPress={handleCreateTeam}>
         <Icon name="add" color={Colors.secondary[600]} size={40} />
-      </BorderlessButton>
+      </RectButton>
     </View>
   );
 }

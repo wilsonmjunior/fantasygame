@@ -47,7 +47,7 @@ export function useEditTeam({ teamId }: UseEditParams) {
         shield: teamShield,
       });
 
-      router.push('/(tabs)/team/edit/select-players'); 
+      router.push('/team/select-players'); 
     } catch (error: any) {
       Alert.alert('Erro', 'Erro ao salvar dados do time. Tente novamente.');
     } finally {

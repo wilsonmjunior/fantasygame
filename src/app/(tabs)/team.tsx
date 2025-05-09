@@ -1,14 +1,13 @@
-import { Fragment } from 'react';
+import { Fragment, useCallback } from 'react';
 import {
   View,
   FlatList,
   StyleSheet,
-  TouchableOpacity,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import { Colors } from '@/src/constants/Colors';
-import { Header, Icon, TeamPlayerCard } from '@/src/presentation/components';
+import { Header, TeamPlayerCard } from '@/src/presentation/components';
 import { TeamHeader, EmptyTeam } from '@/src/presentation/components/screens/Team';
 import { useLoadTeam } from '@/src/presentation/hooks';
 import { getStatusBarHeight } from '@/src/status-bar';
@@ -18,27 +17,21 @@ export default function TeamScreen() {
 
   const { team } = useLoadTeam();
 
-  const handleEditPress = (teamId: string) => {
-    router.push(`/(tabs)/team/edit/${teamId}`);
-  };
+  const handleEditPress = useCallback((teamId?: string) => {
+    router.push(`/team/${teamId}`);
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Header title="Time" />
+      <Header 
+        title="Time" icon="pencil" 
+        onButtonPress={() => handleEditPress(team?.id)}
+        style={styles.header}
+      />
       
       {
         team ? (
           <Fragment>
-            <View style={styles.editButtonContainer}>
-              <TouchableOpacity 
-                onPress={() => handleEditPress(team.id)}
-                style={styles.editButton}
-                activeOpacity={0.7}
-              >
-                <Icon name="pencil" color={Colors.white} size={16} />
-              </TouchableOpacity>
-            </View>
-
             <FlatList 
               data={team.players}
               keyExtractor={(item) => item.id}
@@ -72,22 +65,12 @@ const styles = StyleSheet.create({
     paddingTop: getStatusBarHeight + 24,
     paddingHorizontal: 20,
   },
+  header: {
+    marginBottom: 24,
+  },
   columnWrapper: {
     flex: 1,
     justifyContent: 'space-between',
     marginBottom: 12,
   },
-  editButtonContainer: { 
-    flexDirection: 'row', 
-    justifyContent: 'flex-end',
-    marginBottom: 12,
-  },
-  editButton: {
-    width: 26, 
-    height: 26, 
-    borderRadius: 4, 
-    backgroundColor: Colors.primary[50]+20, 
-    alignItems: 'center', 
-    justifyContent: 'center',
-  }
 });

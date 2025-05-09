@@ -1,24 +1,31 @@
 {
   "expo": {
-    "name": "fantasygame",
+    "name": "Fantasy Game",
     "slug": "fantasygame",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo.png",
     "scheme": "fantasygame",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": true, 
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.wilsonmjuniorx.fantasygame",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
+      },
+      "icon": {
+        "dark": "./assets/images/adaptive-icon.png",
+        "light": "",
+        "tinted": ""
       }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#1C1C1C"
+        "monochromeImage": "./assets/images/adaptive-icon.png",
+        "backgroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#F5F5F5"
       },
       "package": "com.wilsonmjuniorx.fantasygame"
     },
@@ -36,9 +43,14 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#1C1C1C",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200
+          "image": "./assets/images/splash-icon-dark.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#F5F5F5",
+          "dark": {
+            "icon": "./assets/images/splash-icon-light.png",
+            "backgroundColor": "#1C1C1C"
+          }
         }
       ]
     ],
